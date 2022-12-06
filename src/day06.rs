@@ -4,39 +4,39 @@ use std::fs;
 pub fn run() {
     let content = fs::read_to_string("input/day06.txt")
         .expect("Couldn't read File");
-    part1(&content);
-    part2(&content);
-
-}
-
-fn part1(content : &String) {
     let input = content.chars();
     let mut searched : Vec<char> = Vec::new();
+    let mut p1 = 0;
+    let mut p2 = 0;
     for i in input {
         searched.push(i.to_owned());
-        if searched.len() > 3 {
-            let prev4 = &searched[searched.len() - 4..searched.len()];
-            if !has_dup(prev4) {
-                break;
-            }
+        if part1(&searched) & (p1 == 0){
+            p1 = searched.len()
+        }
+        if part2(&searched) & (p2 == 0){
+            p2 = searched.len()
         }
     }
-    println!("Day 06 Part 1: {}", searched.len())
+    println!("Day 06 Part 1: {}", p1);
+    println!("Day 06 Part 2: {}", p2);
 }
 
-fn part2(content : &String) {
-    let input = content.chars();
-    let mut searched : Vec<char> = Vec::new();
-    for i in input {
-        searched.push(i.to_owned());
-        if searched.len() > 13 {
-            let prev4 = &searched[searched.len() - 14..searched.len()];
-            if !has_dup(prev4) {
-                break;
-            }
+fn part1(searched : &Vec<char>) -> bool {
+    return search_last(searched, 4)
+}
+
+fn part2(searched : &Vec<char>) -> bool {
+    return search_last(searched, 14)
+}
+
+fn search_last(searched : &Vec<char>, amount : usize) -> bool {
+    if searched.len() > amount - 1 {
+        let prev4 = &searched[searched.len() - amount..searched.len()];
+        if !has_dup(prev4) {
+            return true;
         }
     }
-    println!("Day 06 Part 2: {}", searched.len())
+    return false;
 }
 
 fn has_dup<T: PartialEq>(slice: &[T]) -> bool {
