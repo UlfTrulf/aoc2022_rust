@@ -69,9 +69,9 @@ fn part2(mut input : Vec<String>) {
             crt.push(String::from(""))
         }
         if pos.abs_diff(x) < 2 {
-            crt[lpos].push_str("#");
+            crt[lpos].push_str("##");
         } else {
-            crt[lpos].push_str(".");
+            crt[lpos].push_str("..");
         }
         if input[input.len() - 1] == "noop" {
             input.pop();
