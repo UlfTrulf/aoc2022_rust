@@ -96,7 +96,7 @@ fn convert_input() -> Vec<Monkey> {
 }
 
 fn part1(mut apes: Vec<Monkey>) {
-    for level in 0..20 {
+    for _level in 0..20 {
         for monkey in 0..apes.len() {
             while apes[monkey].items.len() > 0 {
                 let item = apes[monkey].items.pop().unwrap();
@@ -150,7 +150,7 @@ fn part2(mut apes: Vec<Monkey>) {
     for modifier in &apes {
         modi *= modifier.test;
     }
-    for level in 0..10000 {
+    for _level in 0..10000 {
         for monkey in 0..apes.len() {
             while apes[monkey].items.len() > 0 {
                 let item = apes[monkey].items.pop().unwrap();
